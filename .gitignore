@@ -24,3 +24,5 @@ node_modules/
 
 .idea
 videos
+allure-report
+allure-results
