@@ -9,15 +9,15 @@ pipeline {
 
         stage('Configuration') {
             steps {
-                sh 'npm config set registry https://registry.npmjs.org/'
-                sh 'npm install'
+                bat 'npm config set registry https://registry.npmjs.org/'
+                bat 'npm install'
             }
         }
 
         stage('Run tests') {
             steps {
-                sh "npx cypress run --env allure=true --reporter mocha-allure-reporter"
-                sh "npx allure generate allure-results --clean -o allure-report"
+                bat "npx cypress run --env allure=true --reporter mocha-allure-reporter"
+                bat "npx allure generate allure-results --clean -o allure-report"
             }
         }
 
