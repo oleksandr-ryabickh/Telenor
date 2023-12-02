@@ -1,5 +1,13 @@
+node {
+    CYPRESS_DOCKER_PATH = 'docker/Dockerfile'
+}
+
 pipeline {
-  agent any
+    agent {
+          dockerfile {
+            filename "${CYPRESS_DOCKER_PATH}"
+          }
+    }
     stages {
         stage('Clone Git repository') {
             steps {
