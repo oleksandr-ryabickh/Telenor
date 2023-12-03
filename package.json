@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "cypress:open": "cypress open --e2e --browser chrome",
-    "cypress:run": "npx cypress run --env allure=true --reporter mocha-allure-reporter",
+    "cypress:run": "npx cypress run --env allure=true",
     "report:allure": "allure generate allure-results --clean -o allure-report && allure open allure-report"
   },
   "repository": {
@@ -29,7 +29,6 @@
     "cypress": "^12.8.1"
   },
   "devDependencies": {
-    "@shelex/cypress-allure-plugin": "^2.40.0",
-    "mocha-allure-reporter": "^1.4.0"
+    "@shelex/cypress-allure-plugin": "^2.40.0"
   }
 }

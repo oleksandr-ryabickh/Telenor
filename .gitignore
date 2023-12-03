@@ -26,3 +26,5 @@ node_modules/
 videos
 allure-report
 allure-results
+cypress/reports
+cypress/screenshots

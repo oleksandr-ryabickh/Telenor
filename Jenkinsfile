@@ -1,13 +1,6 @@
-node {
-    CYPRESS_DOCKER_PATH = 'docker/Dockerfile'
-}
-
 pipeline {
-    agent {
-          dockerfile {
-            filename "${CYPRESS_DOCKER_PATH}"
-          }
-    }
+    agent any
+    tools {nodejs "NodeJS"}
     stages {
         stage('Clone Git repository') {
             steps {
@@ -24,23 +17,19 @@ pipeline {
 
         stage('Run tests') {
             steps {
-                bat "npx cypress run --env allure=true --reporter mocha-allure-reporter"
-                bat "npx allure generate allure-results --clean -o allure-report"
+                bat "npx cypress run --env allure=true"
             }
         }
 
         stage('Publish Reports') {
             steps{
-                publishHTML(
-                    target: [
-                            allowMissing         : false,
-                            alwaysLinkToLastBuild: false,
-                            keepAll              : true,
-                            reportDir            : './allure-report',
-                            reportFiles          : 'index.html',
-                            reportName           : "Allure Report"
-                    ]
-                )
+                allure([
+                    includeProperties: false,
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'allure-results']],
+                    report: "allure-report"
+                ])
             }
         }
     }
